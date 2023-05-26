@@ -52,7 +52,7 @@ def scrape_page(page):
 # pool.join()
 paginas = []
 #%%
-for i in range(1,100):
+for i in range(1,500):
     scrape_page(i)
 
 # %%
@@ -60,5 +60,5 @@ df_total = pd.concat(paginas)
 df_total.drop_duplicates('id', inplace=True)
 df_total
 # %%
-df_total.to_excel('log_camera4.xlsx')
+df_total.to_excel('data/log_camera4.xlsx')
 # %%

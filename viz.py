@@ -34,7 +34,7 @@ df
 # %%
 df[['posto','adido']].value_counts()
 # %%
-df['tempo para subir'].hist(by=df['posto'], sharex=True, sharey=True)
+df['tempo para subir'].hist(by=df['posto'], sharex=True, sharey=False)
 # %%
 df2 = pd.DataFrame(df[['posto','dia pegou','tempo para subir']].groupby(['posto','dia pegou']).mean()['tempo para subir']).reset_index()
 df2 = df2[df2['dia pegou'].astype(str) > '2023-04-30']
@@ -81,13 +81,20 @@ for posto in df['posto'].unique():
     fig = px.imshow(df7b, text_auto=True, title=posto)
     fig.show()
 # %%
-df8 = df[df['dia pegou'].astype(str) >= '2023-04-01']
-df8 = pd.DataFrame(df8[['mes pegou','user','posto']].groupby(['user','mes pegou']).count()['posto']).reset_index()
-df8b = df8.pivot(index='user', columns='mes pegou', values='posto')
+df8 = df[df['dia pegou'].astype(str) >= '2023-05-15']
+df8 = pd.DataFrame(df8[['dia pegou','user','posto']].groupby(['user','dia pegou']).count()['posto']).reset_index()
+df8b = df8.pivot(index='user', columns='dia pegou', values='posto')
 fig = px.imshow(df8b, text_auto=True, title='Todos os postos')
 fig.show()
 # %%
 df8.sort_values('posto')
 # %%
 df8b.to_excel('data/usuarios.xlsx')
+# %%
+df7 = pd.DataFrame(df[['dia subiu','hora subiu','posto']].groupby(['hora subiu','dia subiu']).count()['posto']).reset_index()
+df7 = df7[df7['dia subiu'].astype(str) >= '2023-05-07']
+df7b = df7.pivot(index='dia subiu', columns='hora subiu', values='posto')
+fig = px.imshow(df7b, text_auto=True, title=posto)
+fig.write_image('img/upload.png')
+fig.show()
 # %%
