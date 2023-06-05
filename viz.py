@@ -48,5 +48,9 @@ df3.pivot(index='dia pegou', columns='posto', values='tempo para subir').plot()
 # %%
 df4 = pd.DataFrame(df[['posto','dia pegou','tempo para subir']].groupby(['posto','dia pegou']).count()['tempo para subir']).reset_index()
 df4 = df4[df4['dia pegou'].astype(str) > '2023-04-30']
-df4.pivot(index='dia pegou', columns='posto', values='tempo para subir').plot()
+df4b = df4.pivot(index='dia pegou', columns='posto', values='tempo para subir')
+
+
+# %%
+df4b.plot.bar(stacked=True)
 # %%
