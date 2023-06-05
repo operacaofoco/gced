@@ -18,10 +18,15 @@ postos = {'SECCNHANGAPIDK1': 'Nhangapi',
 df = pd.read_excel('data/log_camera.xlsx', names = ['nada','subiu','posto','camera','user','rotina','pegou','ref','cse','id'],
                    parse_dates=['subiu','pegou'])
 df.drop_duplicates('id', inplace=True)
+
+df['pegou'] = pd.to_datetime(df['pegou'], dayfirst=True)
+df['subiu'] = pd.to_datetime(df['subiu'], dayfirst=True)
 df = df[['subiu','posto','camera','user','rotina','pegou','ref','cse','id']]
 df['adido']= df['user'].str.len()<8
 df.set_index('id', inplace= True)
 df.replace({'posto':postos}, inplace=True)
+df
+#%%
 df['dia pegou'] = df['pegou'].dt.date
 df['hora pegou'] = df['pegou'].dt.hour
 df['mes pegou'] = (df['pegou'].dt.year.astype(str)+'-'+df['pegou'].dt.month.astype(str)).astype(str)

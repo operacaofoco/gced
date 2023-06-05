@@ -33,7 +33,7 @@ pages
 #driver = webdriver.Firefox(options=options)
 def scrape_page(page):
     print('inicio',page)
-    driver.get(f'http://172.16.1.115/videos/find?dt_start=2022-01-01T00%3A00&dt_end=2023-12-31T00%3A00&page={page}')
+    driver.get(f'http://172.16.1.115/videos/find?is_routine=on&dt_start=2022-01-01T00%3A00&dt_end=2023-12-31T00%3A00&page={page}')
     df = pd.read_html(driver.page_source)
     df2 = [linha.T for linha in df]
     v = driver.find_elements(By.CLASS_NAME, 'video-play-button')
@@ -52,7 +52,7 @@ def scrape_page(page):
 # pool.join()
 paginas = []
 #%%
-for i in range(1,500):
+for i in range(1,1000):
     scrape_page(i)
 
 # %%
@@ -60,5 +60,5 @@ df_total = pd.concat(paginas)
 df_total.drop_duplicates('id', inplace=True)
 df_total
 # %%
-df_total.to_excel('data/log_camera4.xlsx')
+df_total.to_excel('data/log_camera5.xlsx')
 # %%
