@@ -18,10 +18,15 @@ postos = {'SECCNHANGAPIDK1': 'Nhangapi',
 df = pd.read_excel('data/log_camera.xlsx', names = ['nada','subiu','posto','camera','user','rotina','pegou','ref','cse','id'],
                    parse_dates=['subiu','pegou'])
 df.drop_duplicates('id', inplace=True)
+
+df['pegou'] = pd.to_datetime(df['pegou'], dayfirst=True)
+df['subiu'] = pd.to_datetime(df['subiu'], dayfirst=True)
 df = df[['subiu','posto','camera','user','rotina','pegou','ref','cse','id']]
 df['adido']= df['user'].str.len()<8
 df.set_index('id', inplace= True)
 df.replace({'posto':postos}, inplace=True)
+df
+#%%
 df['dia pegou'] = df['pegou'].dt.date
 df['hora pegou'] = df['pegou'].dt.hour
 df['mes pegou'] = (df['pegou'].dt.year.astype(str)+'-'+df['pegou'].dt.month.astype(str)).astype(str)
@@ -47,8 +52,11 @@ df3.pivot(index='dia pegou', columns='posto', values='tempo para subir').plot()
 df4 = pd.DataFrame(df[['posto','dia pegou','tempo para subir']].groupby(['posto','dia pegou']).count()['tempo para subir']).reset_index()
 df4 = df4[df4['dia pegou'].astype(str) > '2023-04-30']
 df4b = df4.pivot(index='dia pegou', columns='posto', values='tempo para subir')
+<<<<<<< HEAD
 
 #%%
+=======
+>>>>>>> 06bfea5fb9bf542e4baf973f15131ae5e178f9a5
 df4b.plot.bar(stacked=True, figsize=(15,10))
 # %%
 for posto in df['posto'].unique():
@@ -99,3 +107,7 @@ df7b = df7.pivot(index='dia subiu', columns='hora subiu', values='posto')
 fig = px.imshow(df7b, text_auto=True, title=posto)
 fig.write_image('img/upload.png')
 fig.show()
+<<<<<<< HEAD
+=======
+# %%
+>>>>>>> 06bfea5fb9bf542e4baf973f15131ae5e178f9a5
