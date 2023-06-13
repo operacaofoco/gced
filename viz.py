@@ -70,7 +70,8 @@ for posto in df['posto'].unique():
             fig.show()
 # %%
 df6 = pd.DataFrame(df[['dia pegou','hora pegou','posto']].groupby(['hora pegou','dia pegou']).count()['posto']).reset_index()
-df6 = df6[df6['dia pegou'].astype(str) >= '2023-04-25']
+df6 = df6[df6['dia pegou'].astype(str) >= '2023-05-01']
+#df6 = df6[df6['dia pegou'].astype(str) < '2023-06-01']
 df6b = df6.pivot(index='dia pegou', columns='hora pegou', values='posto')/2
 fig = px.imshow(df6b, text_auto=True, title='Todos os postos')
 fig.write_image(f'img/todos_postos.png')
@@ -102,4 +103,6 @@ df7b = df7.pivot(index='dia subiu', columns='hora subiu', values='posto')
 fig = px.imshow(df7b, text_auto=True, title=posto)
 fig.write_image('img/upload.png')
 fig.show()
+# %%
+df
 # %%
