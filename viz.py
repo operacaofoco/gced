@@ -52,15 +52,7 @@ df3.pivot(index='dia pegou', columns='posto', values='tempo para subir').plot()
 df4 = pd.DataFrame(df[['posto','dia pegou','tempo para subir']].groupby(['posto','dia pegou']).count()['tempo para subir']).reset_index()
 df4 = df4[df4['dia pegou'].astype(str) > '2023-04-30']
 df4b = df4.pivot(index='dia pegou', columns='posto', values='tempo para subir')
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-#%%
-=======
->>>>>>> 06bfea5fb9bf542e4baf973f15131ae5e178f9a5
->>>>>>> a48c5a4974ae03824d5eb07f0fc1e21336f19fa2
 df4b.plot.bar(stacked=True, figsize=(15,10))
 # %%
 for posto in df['posto'].unique():
@@ -112,11 +104,3 @@ df7b = df7.pivot(index='dia subiu', columns='hora subiu', values='posto')
 fig = px.imshow(df7b, text_auto=True, title=posto)
 fig.write_image('img/upload.png')
 fig.show()
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-=======
-# %%
->>>>>>> 06bfea5fb9bf542e4baf973f15131ae5e178f9a5
->>>>>>> a48c5a4974ae03824d5eb07f0fc1e21336f19fa2
