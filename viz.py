@@ -53,7 +53,10 @@ df4 = pd.DataFrame(df[['posto','dia pegou','tempo para subir']].groupby(['posto'
 df4 = df4[df4['dia pegou'].astype(str) > '2023-04-30']
 df4b = df4.pivot(index='dia pegou', columns='posto', values='tempo para subir')
 
+<<<<<<< HEAD
 #%%
+=======
+>>>>>>> 964ecd1270f5b699d823a60983e81d16a29e3b3c
 df4b.plot.bar(stacked=True, figsize=(15,10))
 # %%
 for posto in df['posto'].unique():
@@ -72,7 +75,8 @@ for posto in df['posto'].unique():
             fig.show()
 # %%
 df6 = pd.DataFrame(df[['dia pegou','hora pegou','posto']].groupby(['hora pegou','dia pegou']).count()['posto']).reset_index()
-df6 = df6[df6['dia pegou'].astype(str) >= '2023-04-25']
+df6 = df6[df6['dia pegou'].astype(str) >= '2023-05-01']
+#df6 = df6[df6['dia pegou'].astype(str) < '2023-06-01']
 df6b = df6.pivot(index='dia pegou', columns='hora pegou', values='posto')/2
 fig = px.imshow(df6b, text_auto=True, title='Todos os postos')
 fig.write_image(f'img/todos_postos.png')
@@ -104,5 +108,8 @@ df7b = df7.pivot(index='dia subiu', columns='hora subiu', values='posto')
 fig = px.imshow(df7b, text_auto=True, title=posto)
 fig.write_image('img/upload.png')
 fig.show()
+<<<<<<< HEAD
 
 # %%
+=======
+>>>>>>> 964ecd1270f5b699d823a60983e81d16a29e3b3c
